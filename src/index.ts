@@ -6,8 +6,7 @@ let intercepts: {
   [path: string]: Scope[];
 } = {};
 
-const defaultPort: number = 0;
-const oldSocketSend = Socket.prototype.send;
+const originalSocketSend = Socket.prototype.send;
 
 class Scope {
   public _done: boolean;
@@ -15,11 +14,10 @@ class Scope {
   public buffer?: Buffer | string | Uint8Array | any[];
   public length?: number;
   public offset?: number;
-  public port: number;
+  public port?: number;
 
   constructor() {
     this._done = false;
-    this.port = defaultPort;
   }
 
   public done(): boolean {
@@ -53,23 +51,15 @@ function overriddenSocketSend(
   addressOrUndefined?: string,
   callbackOrUndefined?: (error: Error | null, bytes: number) => void
 ): void {
-  let offset = 0;
-  let length = 0;
-  let port = defaultPort;
-  let address = 'localhost';
-  let callback: SendCallback | undefined;
+  const hasLengthAndOffset = typeof portOrCallback === 'number';
 
-  if (typeof portOrCallback === 'number') {
-    port = portOrCallback;
-    address = addressOrUndefined || address;
-    callback = callbackOrUndefined;
-    length = (lengthOrAddress as number) || length;
-    offset = offsetOrPort;
-  } else {
-    address = (lengthOrAddress as string) || address;
-    callback = portOrCallback;
-    port = offsetOrPort;
-  }
+  const address = (hasLengthAndOffset ? addressOrUndefined : (lengthOrAddress as string)) || 'localhost';
+  const callback: SendCallback = hasLengthAndOffset
+    ? (callbackOrUndefined as SendCallback)
+    : (portOrCallback as SendCallback);
+  const length = hasLengthAndOffset ? (lengthOrAddress as number) || 0 : 0;
+  const offset = hasLengthAndOffset ? offsetOrPort : 0;
+  const port: number = hasLengthAndOffset ? (portOrCallback as number) : offsetOrPort;
 
   if (offset >= msg.length) {
     throw new Error('Offset into buffer too large.');
@@ -119,10 +109,6 @@ function cleanInterceptions(): void {
   intercepts = {};
 }
 
-function restoreSocketSend(): void {
-  Socket.prototype.send = oldSocketSend;
-}
-
 function interceptSocketSend(): void {
   Socket.prototype.send = overriddenSocketSend;
 }
@@ -131,11 +117,18 @@ function isMocked() {
   return Socket.prototype.send.hasOwnProperty('_mocked');
 }
 
+function restoreSocketSend(): void {
+  Socket.prototype.send = originalSocketSend;
+}
+
 interceptSocketSend();
 
-const clean = cleanInterceptions;
-const intercept = interceptSocketSend;
-const revert = restoreSocketSend;
-
 export default add;
-export {add, revert, intercept, clean, isMocked, Scope};
+export {
+  add,
+  restoreSocketSend as revert,
+  interceptSocketSend as intercept,
+  cleanInterceptions as clean,
+  isMocked,
+  Scope,
+};
