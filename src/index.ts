@@ -21,11 +21,7 @@ class Scope {
   }
 
   public done(): boolean {
-    if (!this._done) {
-      //throw new Error('Scope was not used!');
-      return false;
-    }
-    return true;
+    return this._done;
   }
 }
 
@@ -54,12 +50,10 @@ function overriddenSocketSend(
   const hasLengthAndOffset = typeof portOrCallback === 'number';
 
   const address = (hasLengthAndOffset ? addressOrUndefined : (lengthOrAddress as string)) || 'localhost';
-  const callback: SendCallback = hasLengthAndOffset
-    ? (callbackOrUndefined as SendCallback)
-    : (portOrCallback as SendCallback);
+  const callback = hasLengthAndOffset ? (callbackOrUndefined as SendCallback) : (portOrCallback as SendCallback);
   const length = hasLengthAndOffset ? (lengthOrAddress as number) || 0 : 0;
   const offset = hasLengthAndOffset ? offsetOrPort : 0;
-  const port: number = hasLengthAndOffset ? (portOrCallback as number) : offsetOrPort;
+  const port = hasLengthAndOffset ? (portOrCallback as number) : offsetOrPort;
 
   if (offset >= msg.length) {
     throw new Error('Offset into buffer too large.');
@@ -113,7 +107,7 @@ function interceptSocketSend(): void {
   Socket.prototype.send = overriddenSocketSend;
 }
 
-function isMocked() {
+function isMocked(): boolean {
   return Socket.prototype.send.hasOwnProperty('_mocked');
 }
 
