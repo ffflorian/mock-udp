@@ -31,17 +31,15 @@ describe('mock-udp.add', () => {
 describe('mock-udp.clean', () => {
   it('should clean all interceptions', () => {
     const range = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    range.forEach(function (i) {
-      mockudp.add('localhost:100' + i);
-    });
+    range.forEach(i => mockudp.add('localhost:100' + i));
     mockudp.intercept();
     mockudp.clean();
     const client = dgram.createSocket('udp4');
     range.forEach(i => {
       try {
         client.send(buffer, 0, buffer.length, 1000 + i, 'localhost');
-        fail()
-      } catch(error) {}
+        fail();
+      } catch (error) {}
     });
   });
 });
@@ -55,7 +53,7 @@ describe('mock-udp.overriddenSocketSend', () => {
   it('should intercept a basic UDP request', done => {
     const scope = mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 0, buffer.length, 1000, 'localhost', function (err, bytes) {
+    client.send(buffer, 0, buffer.length, 1000, 'localhost', (err, bytes) => {
       scope.done();
       done();
     });
@@ -104,7 +102,7 @@ describe('mock-udp.overriddenSocketSend', () => {
       try {
         client.send(buffer, 0, buffer.length, 1000, 'localhost');
         fail();
-      } catch(error) {
+      } catch (error) {
         done();
       }
     });
@@ -116,7 +114,7 @@ describe('mock-udp.overriddenSocketSend', () => {
     try {
       client.send(buffer, buffer.length, buffer.length, 1000, 'localhost');
       fail();
-    } catch(error) {}
+    } catch (error) {}
     expect(scope.done()).toBe(false);
   });
 
@@ -126,7 +124,7 @@ describe('mock-udp.overriddenSocketSend', () => {
     try {
       client.send(buffer, buffer.length + 1, buffer.length, 1000, 'localhost');
       fail();
-    } catch(error) {}
+    } catch (error) {}
     expect(scope.done()).toBe(false);
   });
 
@@ -135,8 +133,8 @@ describe('mock-udp.overriddenSocketSend', () => {
     const client = dgram.createSocket('udp4');
     try {
       client.send(buffer, 0, buffer.length + 1, 1000, 'localhost');
-      fail()
-    } catch(error) {}
+      fail();
+    } catch (error) {}
     expect(scope.done()).toBe(false);
   });
 });

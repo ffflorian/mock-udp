@@ -19,5 +19,5 @@ const message = Buffer.from('hello world');
 
 client.send(message, 0, message.length, 1234, 'localhost', (err, bytes) => {
   scope.buffer; // the buffer which would have been sent
-  scope.done();  // Will return `true` if the scope was used, otherwise `false`.
+  scope.done();  // will return `true` if the scope was used, otherwise `false`.
 });

@@ -138,7 +138,4 @@ const intercept = interceptSocketSend;
 const revert = restoreSocketSend;
 
 export default add;
-export {
-  add, revert, intercept, clean, isMocked, Scope,
-};
-
+export {add, revert, intercept, clean, isMocked, Scope};
