@@ -1,0 +1,33 @@
+{
+  "author": "Florian Keller <github@floriankeller.de>",
+  "description": "A zip CLI based on jszip.",
+  "devDependencies": {
+    "jasmine": "3.2.0",
+    "prettier": "1.14.2",
+    "rimraf": "2.6.2",
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.15.0",
+    "tslint-plugin-prettier": "1.3.0",
+    "typescript": "3.0.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@ffflorian/mock-udp",
+  "optionalDependencies": {
+    "@types/node": "10.9.4"
+  },
+  "repository": "https://github.com/ffflorian/mock-udp.git",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "dist": "yarn clean && yarn build",
+    "lint": "tslint --project tsconfig.json",
+    "prettier": "prettier --write \"src/*.ts\" \"spec/*.js\"",
+    "test": "yarn dist && jasmine"
+  },
+  "types": "dist/index.d.ts",
+  "version": "0.0.1"
+}
