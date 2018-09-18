@@ -17,7 +17,7 @@
   "main": "dist/index.js",
   "name": "@ffflorian/mock-udp",
   "optionalDependencies": {
-    "@types/node": "10.9.4"
+    "@types/node": "10.10.1"
   },
   "repository": "https://github.com/ffflorian/mock-udp.git",
   "scripts": {
