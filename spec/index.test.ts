@@ -1,7 +1,5 @@
-//@ts-check
-
-const mockudp = require('../');
-const dgram = require('dgram');
+import * as mockudp from '../src';
+import * as dgram from 'dgram';
 const buffer = Buffer.from('hello world');
 
 describe('mock-udp.intercept', () => {
@@ -77,7 +75,10 @@ describe('mock-udp.overriddenSocketSend', () => {
   it('should return a scope with a correct buffer', done => {
     const scope = mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 1, 6, 1000, 'localhost', (err, bytes) => {
+    client.send(buffer, 1, 6, 1000, 'localhost', () => {
+      if (!scope.buffer) {
+        return fail();
+      }
       expect(scope.buffer.toString()).toBe('ello w');
       done();
     });
@@ -87,7 +88,7 @@ describe('mock-udp.overriddenSocketSend', () => {
     const scope1 = mockudp.add('localhost:1000');
     const scope2 = mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 0, buffer.length, 1000, 'localhost', (err, bytes) => {
+    client.send(buffer, 0, buffer.length, 1000, 'localhost', () => {
       scope1.done();
       scope2.done();
       done();
