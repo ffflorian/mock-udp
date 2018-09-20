@@ -3,7 +3,7 @@
 Mock dgram udp requests. Based on [node-mock-udp](https://github.com/mattrobenolt/node-mock-udp).
 
 ## Installation
-Run `yarn add @ffflorian/mock-udp`.
+Run `yarn add @ffflorian/mock-udp` or `npm i @ffflorian/mock-udp`.
 
 ## Usage
 ```ts
