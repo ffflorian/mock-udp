@@ -3,6 +3,7 @@
   "description": "Mock dgram udp requests.",
   "devDependencies": {
     "@types/jasmine": "2.8.8",
+    "@types/node": "10.11.0",
     "jasmine": "3.2.0",
     "prettier": "1.14.3",
     "rimraf": "2.6.2",
@@ -18,9 +19,6 @@
   "license": "MIT",
   "main": "dist/index.js",
   "name": "@ffflorian/mock-udp",
-  "optionalDependencies": {
-    "@types/node": "10.11.0"
-  },
   "repository": "https://github.com/ffflorian/mock-udp.git",
   "scripts": {
     "build": "tsc",
