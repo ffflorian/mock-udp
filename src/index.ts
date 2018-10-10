@@ -88,7 +88,7 @@ function overriddenSocketSend(
   throw new Error(`Request sent to unmocked path: ${host}.`);
 }
 
-(overriddenSocketSend as any)._mocked = true;
+overriddenSocketSend._mocked = true;
 
 function add(path: string): Scope {
   if (!intercepts.hasOwnProperty(path)) {
