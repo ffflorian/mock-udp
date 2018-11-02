@@ -3,7 +3,7 @@
   "description": "Mock dgram udp requests.",
   "devDependencies": {
     "@types/jasmine": "2.8.9",
-    "@types/node": "10.12.1",
+    "@types/node": "10.12.2",
     "jasmine": "3.3.0",
     "prettier": "1.14.3",
     "rimraf": "2.6.2",
