@@ -1,4 +1,3 @@
-.travis.yml
-**/dist/**
+dist
 node_modules
 package.json

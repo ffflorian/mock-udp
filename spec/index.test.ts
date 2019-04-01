@@ -1,5 +1,5 @@
-import * as mockudp from '../src';
 import * as dgram from 'dgram';
+import * as mockudp from '../src';
 const buffer = Buffer.from('hello world');
 
 describe('mock-udp.intercept', () => {
@@ -29,7 +29,7 @@ describe('mock-udp.add', () => {
 describe('mock-udp.clean', () => {
   it('should clean all interceptions', () => {
     const range = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    range.forEach(i => mockudp.add('localhost:100' + i));
+    range.forEach(i => mockudp.add(`localhost:100${i}`));
     mockudp.intercept();
     mockudp.clean();
     const client = dgram.createSocket('udp4');
