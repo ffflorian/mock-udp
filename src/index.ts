@@ -79,7 +79,7 @@ function overriddenSocketSend(
     delete intercepts[host];
 
     if (callback) {
-      callback(null, length);
+      setImmediate(() => callback(null, length));
     }
 
     return;
