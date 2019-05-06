@@ -3,6 +3,8 @@
   "description": "Mock dgram udp requests.",
   "devDependencies": {
     "@ffflorian/prettier-config": "0.0.3",
+    "@semantic-release/changelog": "3.0.2",
+    "@semantic-release/git": "7.0.8",
     "@types/jasmine": "3.3.12",
     "@types/node": "11.13.9",
     "husky": "2.2.0",
@@ -10,6 +12,7 @@
     "lint-staged": "8.1.6",
     "prettier": "1.17.0",
     "rimraf": "2.6.3",
+    "semantic-release": "15.13.3",
     "ts-node": "8.1.0",
     "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
@@ -50,6 +53,7 @@
     "lint:ts": "tslint --project tsconfig.json",
     "lint:ts:spec": "tslint --project tsconfig.jasmine.json",
     "prettier": "prettier \"*.{json,md}\"",
+    "release": "semantic-release",
     "test": "ts-node -P tsconfig.jasmine.json node_modules/.bin/jasmine"
   },
   "version": "0.0.4"
