@@ -50,6 +50,9 @@
   "name": "@ffflorian/mock-udp",
   "prettier": "@ffflorian/prettier-config",
   "repository": "https://github.com/ffflorian/mock-udp.git",
+  "release": {
+    "extends": "@ffflorian/semantic-release-config"
+  },
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist",
@@ -66,5 +69,5 @@
     "release": "semantic-release",
     "test": "ts-node -P tsconfig.jasmine.json node_modules/.bin/jasmine"
   },
-  "version": "0.0.5"
+  "version": "0.1.0"
 }
