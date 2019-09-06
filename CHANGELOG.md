@@ -1,3 +1,9 @@
+## [0.1.2](https://github.com/ffflorian/mock-udp/compare/v0.1.1...v0.1.2) (2019-09-06)
+
+### Bug Fixes
+
+- Use postversion when publishing ([ae74bc4](https://github.com/ffflorian/mock-udp/commit/ae74bc4))
+
 ## [0.1.1](https://github.com/ffflorian/mock-udp/compare/v0.1.0...v0.1.1) (2019-06-14)
 
 ### Bug Fixes
