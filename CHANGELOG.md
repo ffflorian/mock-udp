@@ -1,3 +1,9 @@
+# [0.2.0](https://github.com/ffflorian/mock-udp/compare/v0.1.2...v0.2.0) (2019-11-20)
+
+### Features
+
+- Force publish ([832b69f](https://github.com/ffflorian/mock-udp/commit/832b69f))
+
 ## [0.1.2](https://github.com/ffflorian/mock-udp/compare/v0.1.1...v0.1.2) (2019-09-06)
 
 ### Bug Fixes
