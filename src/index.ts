@@ -27,35 +27,51 @@ class Scope {
   }
 }
 
+function overriddenSocketSend(msg: string | Uint8Array | any[], callback?: SendCallback): void;
+function overriddenSocketSend(msg: string | Uint8Array | any[], port?: number, callback?: SendCallback): void;
 function overriddenSocketSend(
-  msg: Buffer | string | Uint8Array | any[],
-  port: number,
+  msg: string | Uint8Array | any[],
+  port?: number,
   address?: string,
   callback?: SendCallback
 ): void;
 function overriddenSocketSend(
-  msg: Buffer | string | Uint8Array,
+  msg: string | Uint8Array | any[],
   offset: number,
   length: number,
-  port: number,
+  callback?: SendCallback
+): void;
+function overriddenSocketSend(
+  msg: string | Uint8Array | any[],
+  offset: number,
+  length: number,
+  port?: number,
+  callback?: SendCallback
+): void;
+function overriddenSocketSend(
+  msg: string | Uint8Array | any[],
+  offset: number,
+  length: number,
+  port?: number,
   address?: string,
   callback?: SendCallback
 ): void;
 function overriddenSocketSend(
   msg: Buffer | string | Uint8Array | any[],
-  offsetOrPort: number,
-  lengthOrAddress?: number | string,
+  offsetOrPortOrCallback?: number | SendCallback,
+  lengthOrAddressOrCallback?: number | string | SendCallback,
   portOrCallback?: number | SendCallback,
-  addressOrUndefined?: string,
-  callbackOrUndefined?: (error: Error | null, bytes: number) => void
+  addressOrCallback?: string | SendCallback,
+  callbackOrUndefined?: SendCallback
 ): void {
   const hasLengthAndOffset = typeof portOrCallback === 'number';
 
-  const address = (hasLengthAndOffset ? addressOrUndefined : (lengthOrAddress as string)) || 'localhost';
+  const address =
+    (hasLengthAndOffset ? (addressOrCallback as string) : (lengthOrAddressOrCallback as string)) || 'localhost';
   const callback = hasLengthAndOffset ? (callbackOrUndefined as SendCallback) : (portOrCallback as SendCallback);
-  const length = hasLengthAndOffset ? (lengthOrAddress as number) || 0 : 0;
-  const offset = hasLengthAndOffset ? offsetOrPort : 0;
-  const port = hasLengthAndOffset ? (portOrCallback as number) : offsetOrPort;
+  const length = hasLengthAndOffset ? (lengthOrAddressOrCallback as number) || 0 : 0;
+  const offset = hasLengthAndOffset ? (offsetOrPortOrCallback as number) : 0;
+  const port = hasLengthAndOffset ? (portOrCallback as number) : (offsetOrPortOrCallback as number);
 
   if (offset >= msg.length) {
     throw new Error('Offset into buffer too large.');
