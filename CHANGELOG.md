@@ -1,3 +1,13 @@
+# [1.0.0](https://github.com/ffflorian/mock-udp/compare/v0.2.0...v1.0.0) (2019-12-23)
+
+### Features
+
+- Restrict Node.js to >= 10.9 ([699f9b0](https://github.com/ffflorian/mock-udp/commit/699f9b0))
+
+### BREAKING CHANGES
+
+- Node.js >= 10.9 is required.
+
 # [0.2.0](https://github.com/ffflorian/mock-udp/compare/v0.1.2...v0.2.0) (2019-11-20)
 
 ### Features
