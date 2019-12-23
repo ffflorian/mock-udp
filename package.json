@@ -22,6 +22,9 @@
     "tslint-plugin-prettier": "2.1.0",
     "typescript": "3.7.4"
   },
+  "engines": {
+    "node": ">= 10.9"
+  },
   "files": [
     "dist"
   ],
