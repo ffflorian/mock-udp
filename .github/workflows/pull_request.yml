@@ -6,9 +6,14 @@ jobs:
   build_lint_test:
     name: Build, lint and test
     runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.head_commit.message, '[ci skip]') &&
+      !contains(github.event.head_commit.message, '[skip ci]')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
