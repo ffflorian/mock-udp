@@ -1,5 +1,3 @@
-// tslint:disable:no-default-export
-
 import {Socket} from 'dgram';
 
 type SendCallback = (error: Error | null, bytes: number) => void;

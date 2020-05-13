@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import * as dgram from 'dgram';
 import * as mockudp from '../src';
 const buffer = Buffer.from('hello world');
@@ -29,13 +31,13 @@ describe('mock-udp.add', () => {
 describe('mock-udp.clean', () => {
   it('should clean all interceptions', () => {
     const range = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    range.forEach(i => mockudp.add(`localhost:100${i}`));
+    range.forEach(index => mockudp.add(`localhost:100${index}`));
     mockudp.intercept();
     mockudp.clean();
     const client = dgram.createSocket('udp4');
-    range.forEach(i => {
+    range.forEach(index => {
       try {
-        client.send(buffer, 0, buffer.length, 1000 + i, 'localhost');
+        client.send(buffer, 0, buffer.length, 1000 + index, 'localhost');
         fail();
       } catch (error) {}
     });
@@ -51,7 +53,7 @@ describe('mock-udp.overriddenSocketSend', () => {
   it('should intercept a basic UDP request', done => {
     const scope = mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 0, buffer.length, 1000, 'localhost', (err, bytes) => {
+    client.send(buffer, 0, buffer.length, 1000, 'localhost', () => {
       scope.done();
       done();
     });
@@ -66,7 +68,7 @@ describe('mock-udp.overriddenSocketSend', () => {
   it('should return the correct number of bytes to the callback', done => {
     mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 0, 5, 1000, 'localhost', (err, bytes) => {
+    client.send(buffer, 0, 5, 1000, 'localhost', (_, bytes) => {
       expect(bytes).toBe(5);
       done();
     });
@@ -98,7 +100,7 @@ describe('mock-udp.overriddenSocketSend', () => {
   it('should throw an error when reusing an intercept', done => {
     const scope = mockudp.add('localhost:1000');
     const client = dgram.createSocket('udp4');
-    client.send(buffer, 0, buffer.length, 1000, 'localhost', (err, bytes) => {
+    client.send(buffer, 0, buffer.length, 1000, 'localhost', () => {
       scope.done();
       try {
         client.send(buffer, 0, buffer.length, 1000, 'localhost');
