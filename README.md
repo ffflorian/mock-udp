@@ -1,4 +1,4 @@
-# mock-udp [![Build Status](https://github.com/ffflorian/mock-udp/workflows/Build/badge.svg)](https://github.com/ffflorian/mock-udp/actions/) [![npm version](https://img.shields.io/npm/v/@ffflorian/mock-udp.svg?style=flat)](https://www.npmjs.com/package/@ffflorian/mock-udp) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ffflorian/mock-udp)](https://dependabot.com)
+# mock-udp [![Build Status](https://github.com/ffflorian/mock-udp/workflows/Build/badge.svg)](https://github.com/ffflorian/mock-udp/actions/) [![npm version](https://img.shields.io/npm/v/@ffflorian/mock-udp.svg?style=flat)](https://www.npmjs.com/package/@ffflorian/mock-udp)
 
 Mock dgram udp requests. Based on [node-mock-udp](https://github.com/mattrobenolt/node-mock-udp).
 
